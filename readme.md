@@ -11,7 +11,16 @@ This project implements the core building blocks of the GPT-1 architecture from 
 - **Masked Multi-Head Self-Attention**
 - **Transformer Decoder Blocks** (pre-LN/post-LN feed-forward + residual connections, as in the original architecture)
 - **Temperature-controlled sampling** for text generation
+- **Top-K sampling** for text generation
 - Configurable model size (layers, heads, embedding dimension, context length)
+## Config
+
+- Context Length: 128
+- Vocab Size: 50257
+- Embedding Dim: 300
+- Number of Attention Heads: 12
+- Number of Decoders: 12
+- Total parameters: 78,683,357
 
 ## Dataset
 
@@ -56,6 +65,8 @@ Following the GPT-1 paper, the model is a **decoder-only Transformer**:
 
 The model is trained with a standard **causal language modeling objective** (next-token prediction).
 
+![GPT1 Visual](Transformer_Visual.png)
+
 ## Example Output
 
 ```
@@ -64,10 +75,8 @@ Generated: "There was a dragon. He was very happy and he loved to play in the pa
 ```
 ## Future Improvements
 
-- Scale up dataset size and vocabulary
-- Add top-k / nucleus (top-p) sampling
+- Scale up dataset size 
 - Add checkpointing and resume-from-checkpoint support
-- Add validation loss tracking / perplexity metrics
 - Experiment with longer context windows
 
 ## References
