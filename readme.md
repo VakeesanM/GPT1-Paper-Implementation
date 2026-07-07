@@ -16,8 +16,9 @@ This project implements the core building blocks of the GPT-1 architecture from 
 ## Dataset
 
 - ~11,000 short stories
-- Each story capped at fewer than 128 words
+- Each story capped at 128 words
 - Trained for **15 epochs**
+- Dataset taken from "https://huggingface.co/datasets/roneneldan/TinyStories"
 
 > Note: This is a small-scale reproduction meant for learning and experimentation, not a faithful reproduction of the original GPT-1's scale (which was trained on the BooksCorpus dataset with ~117M parameters).
 
@@ -37,7 +38,7 @@ pip install -r requirements.txt
 python streamlit run "GPT/app.py"
 ```
 
-The `--temperature` flag controls sampling randomness:
+The `temperature` flag controls sampling randomness:
 - Lower values (e.g. `0.2`) → more deterministic, repetitive text
 - Higher values (e.g. `1.2`) → more diverse, riskier text
 
