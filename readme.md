@@ -35,7 +35,8 @@ This project implements the core building blocks of the GPT-1 architecture from 
 ## Installation
 
 ```bash
-git clone <https://github.com/VakeesanM/GPT1-Paper-Implementation.git>
+git clone https://github.com/VakeesanM/GPT1-Paper-Implementation.git
+cd "GPT1-Paper-Implementation"
 pip install -r requirements.txt
 ```
 
