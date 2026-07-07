@@ -152,14 +152,17 @@ model.eval()
 
 
 
-def generate(text:str, temp=0.7, max_len=20):
+def generate(text:str, temp=0.7, max_len=20, top_k=40):
     yield text
     tokens = tokenizer(text)['input_ids']
     for i in range(max_len):
       tensor = torch.tensor(tokens).unsqueeze(0)
       with torch.inference_mode():
-        logitis = (model(tensor.to(device))[:, -1])/temp
-        probs = softmax(logitis)
+        logits = (model(tensor.to(device))[:, -1])/temp
+        values, indexs = torch.topk(logits, top_k)
+        logits = torch.full_like(logits, float("-inf"))
+        logits.scatter_(1, indexs, values)
+        probs = softmax(logits)
         output = torch.multinomial(probs, num_samples=1).item()
         yield tokenizer.decode(output)
         tokens.append(output)
