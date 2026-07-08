@@ -8,6 +8,9 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+WORKDIR /app/GPT
+
+
 EXPOSE 8501
 
-CMD ["streamlit", "run", "GPT/app.py"] 
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

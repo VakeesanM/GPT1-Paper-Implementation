@@ -138,15 +138,11 @@ class GPT1(nn.Module):
     return x
 
 softmax = nn.Softmax()
-print("Loading Tokenizer")
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
-print("Done")
-model = GPT1().to(device)
 
-print("Loading Model w Pretrained Weights")
-weights = torch.load("GPT\model_weights.pt", weights_only=True, map_location=torch.device(device))
+model = GPT1().to(device)
+weights = torch.load("model_weights.pt", weights_only=True, map_location=torch.device(device))
 model.load_state_dict(weights)
-print("Weights Loaded!")
 
 model.eval()
 
@@ -158,7 +154,6 @@ def generate(text:str, temp=0.7, max_len=20, top_k=40):
     for i in range(max_len):
       if len(tokens) > 128:
         tokens = tokens[-CONTEXT_LEN:]
-      print(len(tokens))
       tensor = torch.tensor(tokens).unsqueeze(0)
       with torch.inference_mode():
         logits = (model(tensor.to(device))[:, -1])/temp
