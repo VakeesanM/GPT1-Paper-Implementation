@@ -156,6 +156,9 @@ def generate(text:str, temp=0.7, max_len=20, top_k=40):
     yield text
     tokens = tokenizer(text)['input_ids']
     for i in range(max_len):
+      if len(tokens) > 128:
+        tokens = tokens[-CONTEXT_LEN:]
+      print(len(tokens))
       tensor = torch.tensor(tokens).unsqueeze(0)
       with torch.inference_mode():
         logits = (model(tensor.to(device))[:, -1])/temp
