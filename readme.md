@@ -4,7 +4,8 @@ A from-scratch PyTorch implementation of GPT-1, based on the original paper **["
 
 This project implements the core building blocks of the GPT-1 architecture from the ground up — no high-level transformer libraries — and trains a small model on a corpus of short stories to validate the implementation end-to-end.
 
-Link to Live Demo: <Note: Hugging Face Link>
+Link to Live Demo: https://huggingface.co/spaces/VakeesanM/GPT1_Demo
+
 ## Features
 
 - **Byte Pair Encoding (BPE)** 
