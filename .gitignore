@@ -1,3 +1,4 @@
 venv
-GPT/model_weights.pt
 GPT/__pycache__
+GPT/training/model.pt
+GPT/components/__pycache__
