@@ -12,7 +12,7 @@ class Decoder(nn.Module):
     self.masked_multi_head_attn = MultiHeadAttention(embed_size, heads=heads)
     self.norm1 = nn.LayerNorm(normalized_shape=(self.embed_size))
 
-    self.router = Router(self.embed_size)
+    self.router = Router(self.embed_size, num_experts)
 
     self.experts = nn.ModuleList()
     for i in range(num_experts):
@@ -36,7 +36,7 @@ class Decoder(nn.Module):
         mask = routing_idx == expert_id
         if mask.any():
             out = expert(x[mask])
-            output[mask] = out * gate_val[mask].unsqeeze(-1)
+            output[mask] = out * gate_val[mask].unsqueeze(-1)
 
       
     x = output

@@ -27,8 +27,8 @@ class Attention(nn.Module):
             K = torch.concat([self.key_cahce, K], dim=1)
             V = torch.concat([self.value_cache, V], dim=1)
         
-        self.value_cache = V
-        self.key_cahce = K
+        self.value_cache = V.detach()
+        self.key_cahce = K.detach()
 
         attn = (Q @ K.transpose(1,2)) / math.sqrt(self.d_k) # Q @ K.T / sqrt(d_k)
         # attn is (batch, Sequence, Sequence)
