@@ -27,12 +27,14 @@ class Transformer(nn.Module):
     self.cache_len = 0
   def forward(self, x, kv_chace=False):
     # x is (batch, seq)
+    s_new = x.shape[1]
     x = self.embedding(x) # (batch, seq, emb_dim)
     offset = self.cache_len if kv_chace else 0
     x = self.pos_emb(x, offset)
     for block in self.decoders:
       x = block(x, kv_chace) # Each block returns (batch, seq, emb_dim)
     x = self.fc(x) 
+    self.cache_len = offset + s_new
     # x = nn.Softmax(x). Unforuntely, Cross Entropy Loss applies softmax, so we can't build in softmax into the model itself.
     return x
   
