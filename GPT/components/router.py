@@ -14,5 +14,5 @@ class Router(nn.Module):
     def forward(self, x):
         x = self.fc(x)
         x = nn.functional.softmax(x, dim=-1)
-        idx, gate_val = torch.max(x, dim=-1)
+        gate_val, idx = torch.max(x, dim=-1)
         return idx, gate_val
