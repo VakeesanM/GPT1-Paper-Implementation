@@ -30,6 +30,12 @@ class Attention(nn.Module):
         self.value_cache = V.detach()
         self.key_cahce = K.detach()
 
+        if self.value_cache.shape[1] > 127:
+            self.value_cache = self.value_cache[:, -127:, :]
+            self.key_cache = self.key_cache[:, -127:, :]
+
+
+
         attn = (Q @ K.transpose(1,2)) / math.sqrt(self.d_k) # Q @ K.T / sqrt(d_k)
         # attn is (batch, Sequence, Sequence)
 
