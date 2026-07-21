@@ -14,6 +14,8 @@ Link to Live Demo: https://huggingface.co/spaces/VakeesanM/GPT1_Demo
 - **Transformer Decoder Blocks** (pre-LN/post-LN feed-forward + residual connections, as in the original architecture)
 - **Temperature-controlled sampling** for text generation
 - **Top-K sampling** for text generation
+- **MOE and Routing**
+- **KV-Cache** to increase model efficiency
 - Configurable model size (layers, heads, embedding dimension, context length)
 ## Config
 
@@ -22,7 +24,8 @@ Link to Live Demo: https://huggingface.co/spaces/VakeesanM/GPT1_Demo
 - Embedding Dim: 300
 - Number of Attention Heads: 12
 - Number of Decoders: 12
-- Total parameters: 78,683,357
+- Number of Experts: 4
+- Total parameters: 109,049,405
 
 ## Dataset
 
@@ -62,13 +65,11 @@ Following the GPT-1 paper, the model is a **decoder-only Transformer**:
 2. 12 stacked decoder blocks, each with:
    - Masked multi-head self-attention with 12 Heads
    - Residual connection + layer normalization
-   - Position-wise feed-forward network
+   - Router and Experts
    - Residual connection + layer normalization
 3. Final linear layer projecting to vocabulary logits
 
 The model is trained with a standard **causal language modeling objective** (next-token prediction).
-
-![GPT1 Visual](Transformer_Visual.png)
 
 ## Example Output
 
