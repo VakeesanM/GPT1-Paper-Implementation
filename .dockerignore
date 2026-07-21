@@ -1,6 +1,5 @@
 .gitignore
 readme.md
 GPT/__pycache__
-GPT\training
+GPT/training/model_training.ipynb
 venv
-Transformer_Visual.png
